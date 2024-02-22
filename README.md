@@ -37,7 +37,7 @@ L'application sera accessible à l'adresse [http://localhost:3000](http://localh
 
 ## Structure du projet
 
-- **`pages/api/auth`** : Contient la configuration de NextAuth et les endpoints pour l'authentification.
-- **`pages/api/user`** : Endpoints pour gérer les utilisateurs (par exemple, obtenir les détails de l'utilisateur actuellement connecté).
-- **`pages`** : Contient les pages de l'application, telles que la page d'inscription, la page de connexion, etc.
+- **`app/api/auth`** : Contient la configuration de NextAuth et les endpoints pour l'authentification.
+- **`app/api/user`** : Endpoints pour gérer les utilisateurs (par exemple, obtenir les détails de l'utilisateur actuellement connecté).
+- **`app`** : Contient les pages de l'application, telles que la page d'inscription, la page de connexion, etc.
 - **`prisma`** : Contient les fichiers de configuration et les migrations pour Prisma.
