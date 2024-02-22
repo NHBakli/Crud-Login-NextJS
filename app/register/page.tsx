@@ -18,7 +18,6 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("Form submitted");
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {

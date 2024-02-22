@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Système d'authentification avec NextAuth, Prisma et PostgreSQL
 
-## Getting Started
+Ce projet est un exemple d'implémentation d'un système d'authentification complet utilisant NextAuth pour l'authentification, Prisma comme ORM pour interagir avec la base de données PostgreSQL et bcrypt pour le hachage des mots de passe.
 
-First, run the development server:
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
+
+- Node.js et npm
+- PostgreSQL
+- Prisma CLI (installé globalement ou localement dans le projet)
+
+## Configuration
+
+1. Cloner le dépôt : `git clone https://github.com/votre-utilisateur/votre-projet.git`
+2. Installer les dépendances : `npm install`
+3. Configurer les variables d'environnement :
+   - Copier le fichier `.env.example` en `.env`
+   - Remplir les variables d'environnement nécessaires dans le fichier `.env` (par exemple, la chaîne de connexion à la base de données)
+4. Créer et initialiser la base de données : `npx prisma migrate dev`
+
+## Utilisation
+
+Pour lancer l'application, exécutez la commande suivante :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera accessible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Fonctionnalités
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Inscription** : Les utilisateurs peuvent créer un compte en fournissant leur adresse e-mail et un mot de passe sécurisé.
+- **Connexion** : Les utilisateurs peuvent se connecter à leur compte en fournissant leur adresse e-mail et leur mot de passe.
+- **Mot de passe sécurisé** : Les mots de passe des utilisateurs sont hachés avant d'être stockés dans la base de données à l'aide de l'algorithme bcrypt.
 
-## Learn More
+## Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **`pages/api/auth`** : Contient la configuration de NextAuth et les endpoints pour l'authentification.
+- **`pages/api/user`** : Endpoints pour gérer les utilisateurs (par exemple, obtenir les détails de l'utilisateur actuellement connecté).
+- **`pages`** : Contient les pages de l'application, telles que la page d'inscription, la page de connexion, etc.
+- **`prisma`** : Contient les fichiers de configuration et les migrations pour Prisma.
