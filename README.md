@@ -34,6 +34,7 @@ L'application sera accessible à l'adresse [http://localhost:3000](http://localh
 - **Inscription** : Les utilisateurs peuvent créer un compte en fournissant leur adresse e-mail et un mot de passe sécurisé.
 - **Connexion** : Les utilisateurs peuvent se connecter à leur compte en fournissant leur adresse e-mail et leur mot de passe.
 - **Mot de passe sécurisé** : Les mots de passe des utilisateurs sont hachés avant d'être stockés dans la base de données à l'aide de l'algorithme bcrypt.
+- **Deconnexion** : Les utilisateurs peuvent se déconnecter de leur compte à tout moment.
 
 ## Structure du projet
 
