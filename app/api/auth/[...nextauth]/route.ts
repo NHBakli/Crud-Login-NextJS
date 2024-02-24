@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDatabase } from "@/helpers/server-helpers";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -56,6 +57,18 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/login",
   },

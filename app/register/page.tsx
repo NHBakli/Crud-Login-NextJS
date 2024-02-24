@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const RegisterPage = () => {
@@ -39,9 +39,8 @@ const RegisterPage = () => {
   };
 
   const { data } = useSession();
-  const router = useRouter();
   if (data?.user) {
-    router.push("/logout");
+    redirect("/logout");
   } else {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

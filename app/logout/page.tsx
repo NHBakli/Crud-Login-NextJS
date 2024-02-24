@@ -1,13 +1,12 @@
 "use client";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function LougoutPage() {
   const { data } = useSession();
-  const router = useRouter();
   if (!data?.user) {
-    router.push("/login");
+    redirect("/login");
   } else {
     return (
       <main className="flex flex-col items-center justify-center min-h-screen">

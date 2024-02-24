@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default function Home() {
   const { data } = useSession();
