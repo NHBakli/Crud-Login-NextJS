@@ -1,5 +1,5 @@
 "use client";
-import FormLogin from "../components/formLogin";
+import FormLogin from "@/app/components/formLogin";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 

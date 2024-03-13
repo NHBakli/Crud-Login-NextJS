@@ -38,6 +38,14 @@ const Navbar = () => {
                 Logout
               </Link>
             )}
+            {data?.user?.role && data.user.role.toUpperCase() === "ADMIN" && (
+              <Link
+                href="/dashboard"
+                className="text-white hover:text-gray-300 transition duration-300"
+              >
+                Dashboard
+              </Link>
+            )}
           </div>
         </div>
       </div>
