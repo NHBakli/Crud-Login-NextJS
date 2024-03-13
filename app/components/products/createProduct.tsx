@@ -42,7 +42,6 @@ const CreateProductForms = () => {
         body: JSON.stringify(formData),
       });
       if (response.status === 201) {
-        console.log("Product created successfully");
         router.push("/dashboard/products");
       } else {
         console.error("Error creating account:", response);

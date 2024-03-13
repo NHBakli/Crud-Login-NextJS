@@ -1,9 +1,38 @@
 "use client";
-const deleteProduct = () => {
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+type Props = {
+  productId: number;
+};
+
+const DeleteProduct = ({ productId }: Props) => {
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch("/api/products/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: productId }),
+      });
+      if (response.status === 201) {
+        router.push("/dashboard/products");
+        router.refresh;
+      } else {
+        console.error("Error deleting product:", response);
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="flex justify-center mt-80">
       <div className="bg-white p-6 rounded-md w-96">
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -11,33 +40,30 @@ const deleteProduct = () => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 h-6 cursor-pointer"
-            // onClick={closeModal}
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
+            <path d="M6 18 18 6M6 6l12 12" />
           </svg>
         </div>
-        <p>Do you want to delete the product?</p>
-        <div className="mt-4 flex justify-end">
+        <p className="text-black text-center">
+          Do you want to delete the product?
+        </p>
+        <div className="mt-4 flex justify-center">
           <button
-            className="px-4 py-2 bg-red-500 text-white rounded-md mr-2"
-            onClick={deleteProduct}
+            className="px-4 py-2 bg-red-500 text-white rounded-md mr-2 hover:bg-red-600"
+            onClick={handleDelete}
           >
             Delete
           </button>
-          <button
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md"
-            // onClick={closeModal}
+          <Link
+            href="/dashboard/products"
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
           >
             Cancel
-          </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default deleteProduct;
+export default DeleteProduct;
