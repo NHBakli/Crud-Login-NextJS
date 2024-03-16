@@ -1,19 +1,48 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-export const GET = async (req: Request) => {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export const POST = async (req: Request, { params }: Props) => {
   try {
     const prisma = new PrismaClient();
-    const { id } = await req.json();
-    if (!id)
+
+    const { title, description, quantity, categories } = await req.json();
+
+    const id = +params.id;
+
+    if (!title || !description || !quantity || !categories)
       return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
 
-    const product = await prisma.product.findUnique({
-      where: { id: +id },
+    const category = await prisma.category.findFirst({
+      where: { name: categories },
     });
 
-    return NextResponse.json({ message: product }, { status: 201 });
+    if (!category) {
+      return NextResponse.json(
+        { message: "Category not found" },
+        { status: 404 }
+      );
+    }
+
+    const product = await prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title,
+        description,
+        quantity: +quantity,
+        categories: { connect: { id: category.id } },
+      },
+    });
+
+    return NextResponse.json({ product }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+    return NextResponse.json({ message: "Server Error!" }, { status: 500 });
   }
 };
