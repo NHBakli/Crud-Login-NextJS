@@ -23,14 +23,13 @@ export const POST = async (req: Request) => {
       data: {
         title,
         description,
-        quantity: parseInt(quantity),
+        quantity: +quantity,
         categories: { connect: { id: category.id } },
       },
     });
 
     return NextResponse.json({ product }, { status: 201 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json({ message: "Server Error!" }, { status: 500 });
   }
 };

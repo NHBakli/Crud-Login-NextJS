@@ -20,7 +20,6 @@ const DeleteProduct = ({ productId }: Props) => {
       });
       if (response.status === 201) {
         router.push("/dashboard/products");
-        router.refresh;
       } else {
         console.error("Error deleting product:", response);
       }
