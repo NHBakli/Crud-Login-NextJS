@@ -11,14 +11,13 @@ const DeleteProduct = ({ productId }: Props) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch("/api/products/delete", {
+      const response = await fetch(`/api/products/${productId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: productId }),
       });
-      if (response.status === 201) {
+      if (response.status === 200) {
         router.push("/dashboard/products");
       } else {
         console.error("Error deleting product:", response);
